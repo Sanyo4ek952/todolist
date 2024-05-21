@@ -1,11 +1,8 @@
-import React from 'react';
-import './App.css';
 import {TaskType, Todolist} from "./Todolist";
-
 
 function App() {
 
-    const todolistTitle_1="What to learn"
+    const todolistTitle_1 = "What to learn"
     const tasks: Array<TaskType> = [
         {id: 1, title: "HTML", isDone: true},
         {id: 2, title: 'CSS', isDone: true},
@@ -13,7 +10,7 @@ function App() {
         {id: 4, title: 'REACT', isDone: false},
     ]
 
-    const todolistTitle_2="What to buy"
+    const todolistTitle_2 = "What to buy"
     const tasks_2: Array<TaskType> = [
         {id: 1, title: "Water", isDone: true},
         {id: 2, title: 'Beer', isDone: true},
