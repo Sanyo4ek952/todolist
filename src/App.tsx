@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
 import {FilterValueType, TaskType} from './types/common';
+import {v1} from "uuid";
 
 //Create
 //Read (view mode, filter, sort, page, search)
@@ -24,12 +25,28 @@ function App() {
 
     const [tasks, setTasks] = useState<Array<TaskType>>(
         [
-            {id: 1, title: "HTML", isDone: true},
-            {id: 2, title: "CSS", isDone: true},
-            {id: 3, title: "JS/TS", isDone: false},
-            {id: 4, title: "REACT", isDone: false},
+            {id: v1(), title: "HTML", isDone: true},
+            {id: v1(), title: "CSS", isDone: true},
+            {id: v1(), title: "JS/TS", isDone: false},
+            {id: v1(), title: "REACT", isDone: false},
         ]
     )
+
+    const addTask = (title:string) => {
+        const newTask: TaskType={
+            id: v1(),
+            title,
+            isDone: false,
+        }
+        //Имутабельная работа
+        const copyState =[...tasks]
+        copyState.push(newTask)
+
+        //Имутабельная работа тоже только короче
+        setTasks([...tasks,newTask])
+    }
+
+
 
     //UI
 
@@ -43,7 +60,7 @@ function App() {
         filteredTasksForTodolist = tasks.filter(t => t.isDone)
     }
     //
-    const removeTask = (taskId: number) => {
+    const removeTask = (taskId: string) => {
         const nextState = tasks.filter(t => t.id !== taskId)
         setTasks(nextState);
         console.log(tasks)
@@ -60,7 +77,7 @@ function App() {
                 removeTask={removeTask}
                 title={todolistTitle}
                 tasks={filteredTasksForTodolist}
-            />
+                addTask={addTask}            />
             {/* Todolist({title: "What to learn", tasks: tasks}) */}
         </div>
     );
